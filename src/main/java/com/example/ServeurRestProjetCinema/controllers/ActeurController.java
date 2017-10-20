@@ -68,7 +68,7 @@ public class ActeurController {
         }
 
         acteurRepository.delete(acteur);
-        return ResponseEntity.ok().build();
+        return ResponseEntity.ok(acteur);
     }
 
 }

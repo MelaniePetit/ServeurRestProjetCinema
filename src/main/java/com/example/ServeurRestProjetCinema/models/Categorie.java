@@ -1,11 +1,18 @@
 package com.example.ServeurRestProjetCinema.models;
 
+import com.fasterxml.jackson.annotation.JsonIdentityInfo;
+import com.fasterxml.jackson.annotation.JsonIgnore;
+import com.fasterxml.jackson.annotation.ObjectIdGenerators;
 import org.hibernate.validator.constraints.NotBlank;
 
 import javax.persistence.*;
+import java.util.Collection;
 
 @Entity
 @Table(name = "categorie")
+@JsonIdentityInfo(
+        generator = ObjectIdGenerators.PropertyGenerator.class,
+        property = "code")
 public class Categorie {
 
     @Id
@@ -15,6 +22,10 @@ public class Categorie {
     @NotBlank
     @Column(name = "LibelleCat")
     private String libbele;
+
+    @JsonIgnore
+    @OneToMany(mappedBy = "categorie")
+    private Collection<Film> films;
 
     public Categorie() {
     }
@@ -33,5 +44,13 @@ public class Categorie {
 
     public void setLibbele(String libbele) {
         this.libbele = libbele;
+    }
+
+    public Collection<Film> getFilms() {
+        return films;
+    }
+
+    public void setFilms(Collection<Film> films) {
+        this.films = films;
     }
 }

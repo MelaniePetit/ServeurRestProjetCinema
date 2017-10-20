@@ -16,13 +16,15 @@ public class ActeurController {
     @Autowired
     ActeurRepository acteurRepository;
 
-    //Get all acteur
+    // Get all acteur
     @GetMapping("/liste")
     public List<Acteur> getListeActeurs(){
         return acteurRepository.findAll();
     }
 
-    //Get un acteur via son id
+    // Get un acteur via son id
+    // return a ResponseEntity<Acteur> instead of Acteur. The ResponseEntity class gives us
+    // more flexibility while returning a response from the api.
     @GetMapping("/{id}")
     public ResponseEntity<Acteur> getActeur(@PathVariable(value = "id") int acteurId){
         Acteur acteur = acteurRepository.findOne(acteurId);
@@ -32,13 +34,15 @@ public class ActeurController {
         return ResponseEntity.ok().body(acteur);
     }
 
-    //Create un acteur
-    @PostMapping("/new")
+    // Create un acteur
+    // The @RequestBody annotation is used to bind the request body with a method parameter.
+    // The @Valid annotation makes sure that the request body is valid.
+    @PostMapping("/ajout")
     public Acteur createActeur(@Valid @RequestBody Acteur acteur){
         return acteurRepository.save(acteur);
     }
 
-    //Update un acteur via son id
+    // Update un acteur via son id
     @PutMapping("/{id}")
     public ResponseEntity<Acteur> updateNote(@PathVariable(value = "id") int acteurId,
                                            @Valid @RequestBody Acteur acteurDetails) {
@@ -55,7 +59,7 @@ public class ActeurController {
         return ResponseEntity.ok(updatedNote);
     }
 
-    //Delete un acteur via son id
+    // Delete un acteur via son id
     @DeleteMapping("/{id}")
     public ResponseEntity<Acteur> deleteNote(@PathVariable(value = "id") int acteurId) {
         Acteur acteur = acteurRepository.findOne(acteurId);

@@ -1,5 +1,7 @@
 package com.example.ServeurRestProjetCinema.models;
 
+import org.hibernate.validator.constraints.NotBlank;
+
 import javax.persistence.*;
 import javax.validation.constraints.NotNull;
 import java.sql.Date;
@@ -14,15 +16,15 @@ public class Acteur {
     @Column(name = "IdAct")
     private int id;
 
-    @NotNull
+    @NotBlank
     @Column(name = "NomAct")
     private String nom;
 
-    @NotNull
+    @NotBlank
     @Column(name = "PrenAct")
     private String prenom;
 
-    @NotNull
+    @NotBlank
     @Column(name = "DateNaissAct")
     private Date dateNaiss;
 

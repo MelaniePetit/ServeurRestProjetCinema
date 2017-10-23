@@ -1,11 +1,11 @@
 package com.example.ServeurRestProjetCinema.models;
 
+import com.fasterxml.jackson.annotation.JsonIgnore;
 import org.hibernate.validator.constraints.NotBlank;
 
 import javax.persistence.*;
-import javax.validation.constraints.NotNull;
 import java.sql.Date;
-import java.text.SimpleDateFormat;
+import java.util.List;
 
 @Entity
 @Table(name = "acteur")
@@ -30,6 +30,10 @@ public class Acteur {
 
     @Column(name = "DateDecesAct")
     private Date dateDeces;
+
+    @JsonIgnore
+    @OneToMany(mappedBy = "acteur")
+    private List<Personnage> personnage;
 
     public Acteur() {
     }
@@ -73,5 +77,7 @@ public class Acteur {
     public void setDateDeces(Date dateDeces) {
         this.dateDeces = dateDeces;
     }
+
+
 }
 

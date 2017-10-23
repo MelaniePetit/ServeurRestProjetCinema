@@ -1,12 +1,14 @@
 package com.example.ServeurRestProjetCinema.models;
 
 import com.fasterxml.jackson.annotation.JsonIdentityInfo;
+import com.fasterxml.jackson.annotation.JsonIgnore;
 import com.fasterxml.jackson.annotation.ObjectIdGenerators;
 import org.hibernate.validator.constraints.NotBlank;
 
 import javax.persistence.*;
 import javax.validation.constraints.NotNull;
 import java.sql.Date;
+import java.util.List;
 
 @Entity
 @Table(name = "film")
@@ -47,6 +49,11 @@ public class Film {
     @ManyToOne
     @JoinColumn(name = "CodeCat")
     private Categorie categorie;
+
+    @JsonIgnore
+    @OneToMany(mappedBy = "film")
+    private List<Personnage> personnage;
+
 
     public Film() {
     }
@@ -113,5 +120,13 @@ public class Film {
 
     public void setCategorie(Categorie categorie) {
         this.categorie = categorie;
+    }
+
+    public List<Personnage> getPersonnage() {
+        return personnage;
+    }
+
+    public void setPersonnage(List<Personnage> personnage) {
+        this.personnage = personnage;
     }
 }

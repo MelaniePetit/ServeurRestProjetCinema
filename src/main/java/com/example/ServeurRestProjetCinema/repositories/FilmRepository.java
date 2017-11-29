@@ -15,5 +15,4 @@ public interface FilmRepository extends JpaRepository<Film, Integer> {
 
     public List<Film> findFilmsByCategorie(Categorie categorie);
 
-
 }

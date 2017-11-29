@@ -21,7 +21,7 @@ public class Categorie {
 
     @NotBlank
     @Column(name = "LibelleCat")
-    private String libbele;
+    private String libelle;
 
     @JsonIgnore
     @OneToMany(mappedBy = "categorie")
@@ -38,12 +38,12 @@ public class Categorie {
         this.code = code;
     }
 
-    public String getLibbele() {
-        return libbele;
+    public String getLibelle() {
+        return libelle;
     }
 
-    public void setLibbele(String libbele) {
-        this.libbele = libbele;
+    public void setLibelle(String libelle) {
+        this.libelle = libelle;
     }
 
     public Collection<Film> getFilms() {

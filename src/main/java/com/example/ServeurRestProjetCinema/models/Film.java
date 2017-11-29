@@ -22,23 +22,19 @@ public class Film {
     @Column(name = "IdFilm")
     private int id;
 
-    @NotBlank
     @Column(name = "TitreFilm")
     private String titre;
 
-    @NotNull
     @Column(name = "DureeFilm")
     private int duree;
 
-    @NotNull
     @Column(name = "DateSortieFilm")
     private Date dateSortie;
 
-    @NotNull
+
     @Column(name = "BudgetFilm")
     private int budget;
 
-    @NotNull
     @Column(name = "MontantRecetteFilm")
     private int montantRecette;
 

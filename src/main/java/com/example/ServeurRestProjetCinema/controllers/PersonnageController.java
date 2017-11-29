@@ -14,6 +14,7 @@ import javax.validation.Valid;
 import java.util.List;
 
 @RestController
+@CrossOrigin(origins = "http://localhost:4200")
 @RequestMapping("/Personnage")
 public class PersonnageController {
 
@@ -26,13 +27,13 @@ public class PersonnageController {
 
     // Get tous les personnages
     @GetMapping("/liste")
-    public List<Personnage> getListeReal(){
+    public List<Personnage> getListPerso(){
         return personnageRepository.findAll();
     }
 
     // Get un personnage
     @GetMapping("/{id}")
-    public ResponseEntity<Personnage> getReal(@PathVariable(name = "id") int id){
+    public ResponseEntity<Personnage> getPerso(@PathVariable(name = "id") int id){
         Personnage personnage = personnageRepository.findOne(id);
         if (personnage == null){
             return ResponseEntity.notFound().build();
@@ -42,7 +43,7 @@ public class PersonnageController {
 
     //Get pero d'un film
     @GetMapping("/liste/film/{id}")
-    public List<Personnage> findByFilm(@PathVariable(name = "id") int idFilm){
+    public List<Personnage> findBy(@PathVariable(name = "id") int idFilm){
         Film film = filmRepository.findOne(idFilm);
         if (film == null){
             return null;
@@ -63,7 +64,7 @@ public class PersonnageController {
 
     // Delete perso
     @DeleteMapping("/{id}")
-    public ResponseEntity<Personnage> suppReal(@PathVariable(name = "id") int id){
+    public ResponseEntity<Personnage> suppPerso(@PathVariable(name = "id") int id){
         Personnage personnage = personnageRepository.findOne(id);
         if (personnage == null){
             return ResponseEntity.notFound().build();

@@ -11,7 +11,8 @@ import javax.validation.Valid;
 import java.util.List;
 
 @RestController
-@RequestMapping("/Cat")
+@CrossOrigin(origins = "http://localhost:4200")
+@RequestMapping("/Categorie")
 public class CategorieController {
 
     @Autowired
@@ -47,7 +48,7 @@ public class CategorieController {
         if (categorie == null){
             return ResponseEntity.notFound().build();
         }
-        categorie.setLibbele(catDetail.getLibbele());
+        categorie.setLibelle(catDetail.getLibelle());
 
         Categorie modifCat = categorieRepository.save(categorie);
         return ResponseEntity.ok(modifCat);

@@ -24,7 +24,6 @@ public class Acteur {
     @Column(name = "PrenAct")
     private String prenom;
 
-    @NotBlank
     @Column(name = "DateNaissAct")
     private Date dateNaiss;
 

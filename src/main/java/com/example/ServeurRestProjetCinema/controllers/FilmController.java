@@ -15,6 +15,7 @@ import java.util.Collection;
 import java.util.List;
 
 @RestController
+@CrossOrigin(origins = "http://localhost:4200")
 @RequestMapping("/Film")
 public class FilmController {
 
@@ -27,13 +28,13 @@ public class FilmController {
 
     // Get tous les films
     @GetMapping("/liste")
-    public List<Film> getListeReal(){
+    public List<Film> getListFilm(){
         return filmRepository.findAll();
     }
 
     // Get un film
     @GetMapping("/{id}")
-    public ResponseEntity<Film> getReal(@PathVariable(name = "id") int id){
+    public ResponseEntity<Film> getFilm(@PathVariable(name = "id") int id){
         Film film = filmRepository.findOne(id);
         if (film == null){
             return ResponseEntity.notFound().build();
@@ -63,13 +64,13 @@ public class FilmController {
 
     // Creat film
     @PostMapping("/ajout")
-    public Film ajoutReal(@Valid @RequestBody Film film){
+    public Film ajoutFilm(@Valid @RequestBody Film film){
         return filmRepository.save(film);
     }
 
     // Update film
     @PutMapping("/{id}")
-    public ResponseEntity<Film> modifReal(@PathVariable(name = "id") int id,
+    public ResponseEntity<Film> modifFilm(@PathVariable(name = "id") int id,
                                                  @RequestBody Film filmDetail){
         Film film = filmRepository.findOne(id);
         if (film == null){
@@ -90,7 +91,7 @@ public class FilmController {
 
     // Delete film
     @DeleteMapping("/{id}")
-    public ResponseEntity<Film> suppReal(@PathVariable(name = "id") int id){
+    public ResponseEntity<Film> suppFilm(@PathVariable(name = "id") int id){
         Film film = filmRepository.findOne(id);
         if (film == null){
             return ResponseEntity.notFound().build();

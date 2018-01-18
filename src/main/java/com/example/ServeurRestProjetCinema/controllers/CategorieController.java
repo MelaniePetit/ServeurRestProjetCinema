@@ -1,6 +1,7 @@
 package com.example.ServeurRestProjetCinema.controllers;
 
 import com.example.ServeurRestProjetCinema.models.Categorie;
+import com.example.ServeurRestProjetCinema.models.Film;
 import com.example.ServeurRestProjetCinema.repositories.CategorieRepository;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.*;
@@ -8,6 +9,7 @@ import org.springframework.http.ResponseEntity;
 
 
 import javax.validation.Valid;
+import java.util.Collection;
 import java.util.List;
 
 @RestController
@@ -32,6 +34,16 @@ public class CategorieController {
             return ResponseEntity.notFound().build();
         }
         return ResponseEntity.ok().body(cat);
+    }
+
+    //Get films par categorie
+    @GetMapping("/getFilms")
+    public ResponseEntity<Collection<Film>> getFilms(@RequestParam(value = "code", required = true) String code){
+        Categorie cat = categorieRepository.findOne(code);
+        if (cat == null){
+            return ResponseEntity.notFound().build();
+        }
+        return ResponseEntity.ok().body(cat.getFilms());
     }
 
     //Add cat

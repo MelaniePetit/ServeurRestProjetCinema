@@ -1,5 +1,6 @@
 package com.example.ServeurRestProjetCinema.controllers;
 
+import com.example.ServeurRestProjetCinema.models.Film;
 import com.example.ServeurRestProjetCinema.models.Realisateur;
 import com.example.ServeurRestProjetCinema.repositories.RealisateurRepository;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -7,6 +8,7 @@ import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
 import javax.validation.Valid;
+import java.util.Collection;
 import java.util.List;
 
 @RestController
@@ -31,6 +33,16 @@ public class RealisateurController {
             return ResponseEntity.notFound().build();
         }
         return ResponseEntity.ok().body(realisateur);
+    }
+
+    //Get films par realisateur
+    @GetMapping("films/{id}")
+    public ResponseEntity<Collection<Film>> getFilms(@PathVariable(name = "id") int id){
+        Realisateur realisateur = realisateurRepository.findOne(id);
+        if (realisateur == null){
+            return ResponseEntity.notFound().build();
+        }
+        return ResponseEntity.ok().body(realisateur.getFilms());
     }
 
     // Creat realisateur

@@ -1,8 +1,6 @@
 package com.example.ServeurRestProjetCinema.controllers;
 
-import com.example.ServeurRestProjetCinema.models.Categorie;
-import com.example.ServeurRestProjetCinema.models.Film;
-import com.example.ServeurRestProjetCinema.models.Realisateur;
+import com.example.ServeurRestProjetCinema.models.*;
 import com.example.ServeurRestProjetCinema.repositories.CategorieRepository;
 import com.example.ServeurRestProjetCinema.repositories.FilmRepository;
 import com.example.ServeurRestProjetCinema.repositories.RealisateurRepository;
@@ -11,7 +9,7 @@ import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
 import javax.validation.Valid;
-import java.util.Collection;
+import java.util.ArrayList;
 import java.util.List;
 
 @RestController
@@ -60,6 +58,20 @@ public class FilmController {
             return null;
         }
         return filmRepository.findFilmsByCategorie(categorie);
+    }
+
+    //Get acteur du film
+    @GetMapping("/acteurs/{id}")
+    public List<Acteur> getActeurs(@PathVariable(name = "id") int idFilm){
+        Film film = filmRepository.findOne(idFilm);
+        List<Acteur> acteur = new ArrayList<>();
+        Acteur a;
+        for(Personnage p : film.getPersonnage()){
+            a = p.getActeur();
+            acteur.add(a);
+        }
+        return acteur;
+
     }
 
     // Creat film

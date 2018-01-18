@@ -14,4 +14,5 @@ public interface PersonnageRepository extends JpaRepository<Personnage, Integer>
     public List<Personnage> findAllByFilm(Film film);
 
     public List<Personnage> findAllByActeur(Acteur acteur);
+
 }
